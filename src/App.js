@@ -3,6 +3,7 @@ import "./App.css";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +27,33 @@ function App() {
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    setMenuOpen(false); // Close mobile menu after clicking
   };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuOpen && !event.target.closest(".nav-container")) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [menuOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [menuOpen]);
 
   return (
     <div className="App">
@@ -40,7 +67,20 @@ function App() {
               className="logo-img"
             />
           </div>
-          <ul className="nav-menu">
+
+          {/* Hamburger Menu Button */}
+          <button
+            className={`hamburger ${menuOpen ? "active" : ""}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          {/* Navigation Menu */}
+          <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
             <li className="nav-item">
               <a href="#home" onClick={() => scrollToSection("home")}>
                 Home
@@ -64,6 +104,11 @@ function App() {
           </ul>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {menuOpen && (
+        <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>
+      )}
 
       {/* Hero Section */}
       <section id="home" className="hero">
@@ -92,7 +137,9 @@ function App() {
       {/* About Section */}
       <section id="about" className="section about-section">
         <div className="container">
-          <h2 className="section-title">Tentang Perusahaan</h2>
+          <h2 className="section-title animate-on-scroll">
+            Tentang Perusahaan
+          </h2>
           <div className="about-content">
             <p className="about-text animate-on-scroll">
               CV Venbell Jaya adalah perusahaan yang bergerak di bidang
@@ -144,7 +191,7 @@ function App() {
       {/* Services Section */}
       <section id="services" className="section services-section">
         <div className="container">
-          <h2 className="section-title">Layanan Kami</h2>
+          <h2 className="section-title animate-on-scroll">Layanan Kami</h2>
 
           <div className="services-grid">
             {/* General Supplier */}
@@ -184,7 +231,7 @@ function App() {
       {/* Contact Section */}
       <section id="contact" className="section contact-section">
         <div className="container">
-          <h2 className="section-title">Kontak Perusahaan</h2>
+          <h2 className="section-title animate-on-scroll">Kontak Perusahaan</h2>
           <div className="contact-grid">
             <div className="contact-card animate-on-scroll">
               <div className="icon-box">
@@ -214,6 +261,15 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Scroll to Top Button */}
+      <button
+        className={`scroll-top ${scrolled ? "visible" : ""}`}
+        onClick={() => scrollToSection("home")}
+        aria-label="Scroll to top"
+      >
+        ↑
+      </button>
 
       {/* Footer */}
       <footer className="footer">

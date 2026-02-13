@@ -44,9 +44,8 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  gap: 3rem;
 }
 
 .nav-logo {
@@ -55,6 +54,7 @@ body {
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.3s ease;
+  z-index: 101;
 }
 
 .nav-logo:hover {
@@ -70,6 +70,43 @@ body {
 
 .navbar.scrolled .logo-img {
   height: 45px;
+}
+
+/* Hamburger Menu Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+  transition: all 0.3s ease;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background: #333;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(10.5px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-10.5px) rotate(-45deg);
 }
 
 .nav-menu {
@@ -92,19 +129,65 @@ body {
   font-size: 0.95rem;
   padding: 8px 12px;
   border-radius: 6px;
+  display: block;
 }
 
 .nav-item a:hover {
   color: #ff8c00;
+  background: rgba(255, 140, 0, 0.1);
+}
+
+/* Menu Overlay */
+.menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+/* Scroll to Top Button */
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #ff8c00, #ff6b00);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 98;
+}
+
+.scroll-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-top:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.6);
 }
 
 /* ====== Hero Section ====== */
 .hero {
   position: relative;
   color: white;
-  padding: 120px 2rem 80px;
+  padding: 140px 2rem 100px;
   text-align: center;
-  min-height: 600px;
+  min-height: 650px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,8 +248,8 @@ body {
   background: linear-gradient(135deg, #ff8c00, #ff6b00);
   color: #ffffff;
   border: none;
-  padding: 14px 45px;
-  font-size: 1.05rem;
+  padding: 16px 50px;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
@@ -221,7 +304,7 @@ body {
 
 /* ====== Sections ====== */
 .section {
-  padding: 80px 2rem;
+  padding: 90px 2rem;
   position: relative;
 }
 
@@ -264,12 +347,12 @@ body {
 }
 
 .about-text {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   color: #555;
   margin-bottom: 1.5rem;
   text-align: justify;
   line-height: 1.9;
-  padding: 1.5rem;
+  padding: 2rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -535,50 +618,137 @@ body {
   font-size: 1rem;
 }
 
-/* ====== Responsive Design ====== */
-@media (max-width: 768px) {
+/* ====== Responsive Design - Tablet (768px - 1024px) ====== */
+@media (max-width: 1024px) and (min-width: 769px) {
   .navbar {
-    padding: 0.5rem 1rem;
-  }
-
-  .nav-container {
-    gap: 1.5rem;
+    padding: 0.75rem 1.5rem;
   }
 
   .nav-menu {
-    gap: 1rem;
+    gap: 1.8rem;
   }
 
   .nav-item a {
-    font-size: 0.85rem;
-    padding: 6px 8px;
+    font-size: 0.9rem;
+    padding: 7px 10px;
   }
 
   .hero {
-    padding: 100px 1.5rem 60px;
-    min-height: 500px;
+    min-height: 600px;
+    padding: 130px 2rem 90px;
   }
 
   .hero-content h1 {
-    font-size: 2.2rem;
+    font-size: 3rem;
   }
 
   .tagline {
+    font-size: 1.3rem;
+  }
+
+  .section {
+    padding: 80px 1.5rem;
+  }
+
+  .vision-mission {
+    gap: 2rem;
+  }
+
+  .services-grid {
+    gap: 2.5rem;
+  }
+
+  .scroll-top {
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ====== Responsive Design - Mobile & Small Tablet (max-width: 768px) ====== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    flex-direction: column;
+    background: white;
+    padding: 100px 30px 30px;
+    gap: 0;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s ease;
+    overflow-y: auto;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .menu-overlay {
+    display: block;
+  }
+
+  .nav-item {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-item a {
+    padding: 15px 20px;
     font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-item a:hover {
+    background: rgba(255, 140, 0, 0.1);
+    transform: translateX(5px);
+  }
+
+  .hero {
+    padding: 120px 1.5rem 70px;
+    min-height: 550px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
   }
 
   .cta-button {
-    padding: 12px 35px;
+    padding: 14px 40px;
     font-size: 1rem;
   }
 
   .section {
-    padding: 60px 1.5rem;
+    padding: 70px 1.5rem;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 2.5rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    padding: 1.5rem;
+    text-align: left;
   }
 
   .vision-mission {
@@ -595,59 +765,85 @@ body {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  .scroll-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
 }
 
+/* ====== Responsive Design - Small Mobile (max-width: 480px) ====== */
 @media (max-width: 480px) {
   .navbar {
-    padding: 0.5rem 1rem;
-  }
-
-  .nav-container {
-    gap: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .logo-img {
+    height: 45px;
+  }
+
+  .navbar.scrolled .logo-img {
     height: 40px;
   }
 
+  .hamburger {
+    width: 28px;
+    height: 22px;
+  }
+
+  .hamburger span {
+    height: 2.5px;
+  }
+
   .nav-menu {
-    gap: 0.5rem;
+    width: 260px;
+    padding: 90px 20px 20px;
   }
 
   .nav-item a {
-    font-size: 0.75rem;
-    padding: 4px 6px;
-  }
-
-  .hero {
-    padding: 90px 1rem 50px;
-    min-height: 450px;
-  }
-
-  .hero-content h1 {
-    font-size: 1.8rem;
-  }
-
-  .tagline {
+    padding: 12px 16px;
     font-size: 1rem;
   }
 
+  .hero {
+    padding: 110px 1rem 60px;
+    min-height: 500px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .tagline {
+    font-size: 1.05rem;
+    margin-bottom: 1.8rem;
+  }
+
   .cta-button {
-    padding: 10px 30px;
+    padding: 12px 35px;
     font-size: 0.95rem;
   }
 
   .section {
-    padding: 50px 1rem;
+    padding: 60px 1rem;
   }
 
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title::after {
+    width: 80px;
+    height: 3px;
   }
 
   .about-text {
     font-size: 0.95rem;
-    padding: 1.2rem;
+    padding: 1.3rem;
   }
 
   .vision-card,
@@ -665,5 +861,86 @@ body {
   .icon-box img {
     width: 35px;
     height: 35px;
+  }
+
+  .vision-card h3,
+  .mission-card h3,
+  .service-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .mission-list li,
+  .service-list li {
+    font-size: 0.95rem;
+  }
+
+  .scroll-top {
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+  }
+}
+
+/* ====== Touch Device Optimizations ====== */
+@media (hover: none) and (pointer: coarse) {
+  .nav-item a,
+  .cta-button,
+  .scroll-top,
+  .contact-card a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .cta-button:active {
+    transform: scale(0.98);
+  }
+
+  .scroll-top:active {
+    transform: scale(0.95);
+  }
+
+  /* Larger touch targets for mobile */
+  .nav-item a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hamburger {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ====== Print Styles ====== */
+@media print {
+  .navbar,
+  .hamburger,
+  .scroll-top,
+  .cta-button {
+    display: none;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 2rem;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+    page-break-inside: avoid;
   }
 }
