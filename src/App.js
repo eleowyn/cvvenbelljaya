@@ -9,7 +9,6 @@ function App() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Animate elements on scroll
       const elements = document.querySelectorAll(".animate-on-scroll");
       elements.forEach((el) => {
         const rect = el.getBoundingClientRect();
@@ -21,20 +20,19 @@ function App() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false); // Close mobile menu after clicking
+    setMenuOpen(false);
   };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuOpen && !event.target.closest(".nav-container")) {
@@ -46,7 +44,6 @@ function App() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [menuOpen]);
 
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = "hidden";
@@ -57,7 +54,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Navigation Bar */}
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <div className="nav-container">
           <div className="nav-logo">
@@ -68,7 +64,6 @@ function App() {
             />
           </div>
 
-          {/* Hamburger Menu Button */}
           <button
             className={`hamburger ${menuOpen ? "active" : ""}`}
             onClick={toggleMenu}
@@ -79,7 +74,6 @@ function App() {
             <span></span>
           </button>
 
-          {/* Navigation Menu */}
           <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
             <li className="nav-item">
               <a href="#home" onClick={() => scrollToSection("home")}>
@@ -105,12 +99,10 @@ function App() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div className="menu-overlay" onClick={() => setMenuOpen(false)}></div>
       )}
 
-      {/* Hero Section */}
       <section id="home" className="hero">
         <div className="hero-overlay"></div>
         <div className="hero-background">
@@ -121,7 +113,7 @@ function App() {
           />
         </div>
         <div className="hero-content">
-          <h1 className="fade-in-up">CV Venbell Jaya</h1>
+          <h1 className="fade-in-up">CVs Venbell Jaya</h1>
           <p className="tagline fade-in-up delay-1">
             Supplier Umum & Jasa Transportasi Terpercaya
           </p>
@@ -134,7 +126,6 @@ function App() {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about" className="section about-section">
         <div className="container">
           <h2 className="section-title animate-on-scroll">
@@ -155,7 +146,6 @@ function App() {
             </p>
           </div>
 
-          {/* Vision & Mission */}
           <div className="vision-mission">
             <div className="vision-card animate-on-scroll">
               <div className="icon-box">
@@ -188,13 +178,11 @@ function App() {
         </div>
       </section>
 
-      {/* Services Section */}
       <section id="services" className="section services-section">
         <div className="container">
           <h2 className="section-title animate-on-scroll">Layanan Kami</h2>
 
           <div className="services-grid">
-            {/* General Supplier */}
             <div className="service-card animate-on-scroll">
               <div className="icon-box">
                 <img src="/box.png" alt="Supplier icon" />
@@ -210,7 +198,6 @@ function App() {
               </ul>
             </div>
 
-            {/* Transportation */}
             <div className="service-card animate-on-scroll">
               <div className="icon-box">
                 <img src="/van.png" alt="Transportation icon" />
@@ -228,7 +215,6 @@ function App() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="section contact-section">
         <div className="container">
           <h2 className="section-title animate-on-scroll">Kontak Perusahaan</h2>
@@ -262,7 +248,6 @@ function App() {
         </div>
       </section>
 
-      {/* Scroll to Top Button */}
       <button
         className={`scroll-top ${scrolled ? "visible" : ""}`}
         onClick={() => scrollToSection("home")}
@@ -271,7 +256,6 @@ function App() {
         ↑
       </button>
 
-      {/* Footer */}
       <footer className="footer">
         <p>&copy; 2024 CV Venbell Jaya. All rights reserved.</p>
         <p>Supplier Umum & Jasa Transportasi Terpercaya</p>
