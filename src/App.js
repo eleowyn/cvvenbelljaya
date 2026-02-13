@@ -113,7 +113,7 @@ function App() {
           />
         </div>
         <div className="hero-content">
-          <h1 className="fade-in-up">CVs Venbell Jaya</h1>
+          <h1 className="fade-in-up">CV Venbell Jaya</h1>
           <p className="tagline fade-in-up delay-1">
             Supplier Umum & Jasa Transportasi Terpercaya
           </p>
